@@ -1,36 +1,58 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Lee Junseob — Portfolio
 
-## Getting Started
+C++ 서버 개발자 이준섭의 개인 포트폴리오 웹사이트.
 
-First, run the development server:
+🔗 **Live**: https://seober-web-portfolio.vercel.app/
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## 주요 기능
+
+- 단일 페이지 스크롤 구조 (About / Resume / Roadmap / Contact)
+- 세로 타임라인 기반의 커리어 로드맵
+- 향후 프로젝트 자리에 "Coming soon" placeholder 카드
+- MDX 파일 추가만으로 새 프로젝트 자동 등록
+- 미니멀 / 에디토리얼 디자인 (Pretendard + JetBrains Mono)
+
+## 기술 스택
+
+| 영역 | 도구 |
+|---|---|
+| Framework | Next.js 16 (App Router) |
+| Language | TypeScript |
+| Styling | Tailwind CSS v4 |
+| Content | MDX (`@next/mdx` + gray-matter) |
+| Hosting | Vercel |
+
+## 폴더 구조
+
+```
+src/
+├── app/                    # 라우트 (App Router)
+│   ├── layout.tsx          # 글로벌 레이아웃
+│   ├── page.tsx            # 메인 페이지 (단일 페이지 스크롤)
+│   └── projects/[slug]/    # 프로젝트 상세 동적 라우트
+├── components/             # UI 컴포넌트
+│   ├── layout/             # Header, Footer
+│   ├── sections/           # Hero, About, Resume, Roadmap, Contact
+│   ├── timeline/           # 타임라인 (Compact, Project, ComingSoon)
+│   └── project/            # 프로젝트 상세 레이아웃
+├── content/projects/       # 프로젝트 MDX (frontmatter + 본문)
+├── data/                   # 정적 데이터 (profile, resume, timeline)
+├── lib/                    # MDX 로딩 / 타입
+└── mdx-components.tsx      # MDX 스타일링 (Next.js 컨벤션)
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 로컬 실행
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm install
+npm run dev
+# http://localhost:3000
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 새 프로젝트 추가
 
-## Learn More
+1. `src/content/projects/<slug>.mdx` 파일 생성 (`_template.mdx` 복사)
+2. `public/images/projects/<slug>/` 에 이미지 추가
+3. `git push` → Vercel 자동 배포 (~90초)
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+자세한 기획·구조는 [기획서.md](./기획서.md) 참고.
