@@ -49,10 +49,8 @@ npm run dev
 # http://localhost:3000
 ```
 
-## 새 프로젝트 추가
+## 콘텐츠 수정 / 새 프로젝트 추가
 
-1. `src/content/projects/<slug>.mdx` 파일 생성 (`_template.mdx` 복사)
-2. `public/images/projects/<slug>/` 에 이미지 추가
-3. `git push` → Vercel 자동 배포 (~90초)
+수정 위치, 새 프로젝트 추가 절차, frontmatter 스키마는 [EDITING.md](./EDITING.md) 참고.
 
 자세한 기획·구조는 [기획서.md](./기획서.md) 참고.

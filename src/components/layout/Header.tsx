@@ -1,9 +1,4 @@
-const navLinks = [
-  { href: "#about", label: "소개" },
-  { href: "#resume", label: "이력" },
-  { href: "#roadmap", label: "프로젝트" },
-  { href: "#contact", label: "연락처" },
-];
+import { navLinks } from "@/data/nav";
 
 export function Header() {
   return (

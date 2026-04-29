@@ -1,9 +1,15 @@
 import { compactEntries } from "@/data/timeline";
+import { comingSoonCopy } from "@/data/comingSoon";
 import { getAllProjects } from "@/lib/projects";
 import { ComingSoonCard } from "@/components/timeline/ComingSoonCard";
 import { TimelineEntryCompact } from "@/components/timeline/TimelineEntryCompact";
 import { TimelineEntry } from "@/components/timeline/TimelineEntry";
-import type { CompactEntry, ProjectFrontmatter } from "@/lib/types";
+import { TimelineRow } from "@/components/timeline/TimelineRow";
+import {
+  dateToSortKey,
+  type CompactEntry,
+  type ProjectFrontmatter,
+} from "@/lib/types";
 
 type TimelineItem =
   | { kind: "compact"; data: CompactEntry; sortKey: number }
@@ -18,7 +24,7 @@ export function RoadmapTimeline() {
     ...compactEntries.map<TimelineItem>((e) => ({
       kind: "compact",
       data: e,
-      sortKey: e.sortKey,
+      sortKey: dateToSortKey(e.date),
     })),
     ...projects.map<TimelineItem>((p) => ({
       kind: "project",
@@ -41,24 +47,10 @@ export function RoadmapTimeline() {
           className="absolute top-0 bottom-0 left-[10px] w-0.5 bg-rule md:left-[119px]"
         />
 
-        {/* Top placeholder: Coming soon */}
-        <article className="relative pl-9 pb-12 md:grid md:grid-cols-[100px_1fr] md:gap-x-10 md:pl-0 md:pb-16">
-          <div className="mb-1 md:mb-0 md:pt-2 md:text-right">
-            <span className="font-mono text-xs tracking-wide text-muted md:text-sm">
-              예정
-            </span>
-          </div>
-          {/* ComingSoon dot (size-3 = 12px) — centered on rail (center 11/120 → left 5/114) */}
-          <div
-            aria-hidden
-            className="absolute left-[5px] top-2 size-3 rounded-full border border-dashed border-locked bg-bg md:left-[114px]"
-          />
-          <div>
-            <ComingSoonCard />
-          </div>
-        </article>
+        <TimelineRow dateLabel={comingSoonCopy.dateLabel} dotVariant="outlined">
+          <ComingSoonCard />
+        </TimelineRow>
 
-        {/* Merged entries (descending) */}
         {items.map((item) =>
           item.kind === "compact" ? (
             <TimelineEntryCompact

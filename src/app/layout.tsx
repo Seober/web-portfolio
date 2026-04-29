@@ -18,9 +18,29 @@ const jetbrainsMono = JetBrains_Mono({
   display: "swap",
 });
 
+const SITE_URL = "https://seober-web-portfolio.vercel.app";
+const SITE_TITLE = "Lee Junseob — Portfolio";
+const SITE_DESCRIPTION = "C++ 서버 개발자 이준섭의 포트폴리오";
+
+// OG/Twitter 이미지는 src/app/opengraph-image.tsx, twitter-image.tsx 의
+// Next.js file convention 으로 자동 등록됩니다 (1200×630 동적 생성).
 export const metadata: Metadata = {
-  title: "Lee Junseob — Portfolio",
-  description: "C++ 서버 개발자 이준섭의 포트폴리오",
+  metadataBase: new URL(SITE_URL),
+  title: SITE_TITLE,
+  description: SITE_DESCRIPTION,
+  openGraph: {
+    type: "website",
+    url: SITE_URL,
+    siteName: SITE_TITLE,
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+    locale: "ko_KR",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+  },
 };
 
 export default function RootLayout({
